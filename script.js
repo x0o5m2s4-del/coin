@@ -18,30 +18,85 @@ firebase.initializeApp(firebaseConfig);
 
 const db = firebase.firestore();
 
-async function flipCoin() {
+let selectedChoice = "";
+
+function startGame() {
+
+  const studentId =
+    document.getElementById("studentId").value.trim();
 
   const name =
     document.getElementById("name").value.trim();
 
-  if (!name) {
+  const choice =
+    document.getElementById("choice").value;
 
-    alert("이름을 입력해줘!");
+  if (!studentId || !name || !choice) {
+
+    alert("학번, 이름, 선택을 모두 입력해줘!");
 
     return;
 
   }
 
+  selectedChoice = choice;
+
+  document.getElementById("start-screen")
+    .style.display = "none";
+
+  document.getElementById("game-screen")
+    .style.display = "block";
+
+}
+
+async function flipCoin() {
+
   const result =
-    Math.random() < 0.5 ? "🪙 앞면" : "🪙 뒷면";
+    Math.random() < 0.5
+      ? "앞면"
+      : "뒷면";
 
-  document.getElementById("result").textContent =
-    result;
+  document.getElementById("coin")
+    .textContent =
+      result === "앞면"
+        ? "🙂"
+        : "🦁";
 
-  await db.collection("coinResults").add({
+  let score = 0;
+
+  if (result === selectedChoice) {
+
+    score = 1;
+
+    document.getElementById("result-text")
+      .textContent =
+        "예상 성공! 1점 🎉";
+
+  } else {
+
+    document.getElementById("result-text")
+      .textContent =
+        "예상 실패! 0점 😢";
+
+  }
+
+  const studentId =
+    document.getElementById("studentId").value;
+
+  const name =
+    document.getElementById("name").value;
+
+  await db.collection("coinGame").add({
+
+    studentId: studentId,
 
     name: name,
 
+    choice: selectedChoice,
+
     result: result,
+
+    score: score,
 
     time: new Date()
 
