@@ -1,7 +1,6 @@
 body {
 
   margin: 0;
-
   padding: 20px;
 
   font-family: sans-serif;
@@ -9,7 +8,6 @@ body {
   background: #f2f8ff;
 
   display: flex;
-
   justify-content: center;
 
 }
@@ -17,7 +15,6 @@ body {
 .container {
 
   width: 100%;
-
   max-width: 500px;
 
   text-align: center;
@@ -30,13 +27,14 @@ h1 {
 
 }
 
-input {
+input,
+select {
 
   display: block;
 
   width: 220px;
 
-  margin: 20px auto;
+  margin: 10px auto;
 
   padding: 12px;
 
@@ -49,6 +47,8 @@ input {
 }
 
 button {
+
+  margin-top: 15px;
 
   padding: 12px 20px;
 
@@ -66,10 +66,26 @@ button {
 
 }
 
-#result {
+#game-screen {
 
-  margin-top: 30px;
+  display: none;
 
-  font-size: 80px;
+  margin-top: 20px;
+
+}
+
+#coin {
+
+  margin-top: 20px;
+
+  font-size: 90px;
+
+}
+
+#result-text {
+
+  margin-top: 20px;
+
+  font-size: 22px;
 
 }
